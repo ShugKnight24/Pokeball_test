@@ -1,0 +1,92 @@
+.container {
+  margin-top: 50px;
+}
+
+/* Creating the outer circle*/
+.pokeball {
+  box-sizing: border-box;
+  --pokeball-size: 250px;
+  --pokeball-inner-size: 80px;
+  --pokeball-border-size: 10px;
+
+  --before-diameter: var(--pokeball-inner-size);
+  --after-diameter: calc(var(--before-diameter) - (var(--pokeball-border-size) * 3));
+
+  border:var(--pokeball-border-size) solid #262122;
+  width: var(--pokeball-size);
+  height: var(--pokeball-size);
+  border-radius: 100%;
+  margin: 0 auto;
+  position: relative;
+
+  background: linear-gradient(
+    /* Degree turn of the pokeball*/
+    180deg,
+    /* Begin gradient*/
+    /* Start red*/
+    #d00000 0%,
+    #d00000 47%,
+    /* Start black*/
+    #262122 47%,
+    #262122 53%,
+    /* Start white*/
+    #ffffff 53%,
+    #ffffff 100%
+    );
+}
+
+/* Creating the Inner circle */
+.pokeball:before,
+.pokeball:after {
+  content: " ";
+  border-radius: 100%;
+  display: block;
+  position: absolute;
+}
+
+.pokeball:before{
+  width: var(--before-diameter);
+  height: var(--before-diameter);
+  top: calc(50% - var(--before-diameter) / 2);
+  left: calc(50% - var(--before-diameter) / 2);
+  background: #262122;
+}
+
+.pokeball:after {
+  width: var(--after-diameter);
+  height: var(--after-diameter);
+
+  top: calc(50% - ((var(--after-diameter) / 2) + var(--pokeball-border-size)));
+  left: calc(50% - ((var(--after-diameter) / 2) + var(--pokeball-border-size)));
+
+  background: #ffffff;
+  border: double var(--pokeball-border-size) #262122;
+}
+
+.pokeball-animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-name: shake;
+}
+
+@keyframes shake {
+  from {
+    transform: none;
+  }
+  20% {
+    transform: translate3d(-20%, 0, 0) rotate3d(0, 0, 1,-10deg);
+  }
+  40% {
+    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1,5deg);
+  }
+  50% {
+    transform: translate3d(-10%, 0, 0) rotate3d(0, 0, 1,-10deg);
+  }
+  60% {
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 5deg);
+  }
+  to {
+    transform: none;
+  }
+}
